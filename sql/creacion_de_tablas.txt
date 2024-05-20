@@ -1,0 +1,60 @@
+
+CREATE TABLE `historia_clinica` (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    diagnostico  VARCHAR(255),
+	observaciones  VARCHAR(255),
+	tratamiento VARCHAR(255)
+);
+
+CREATE TABLE `paciente` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  Nombre VARCHAR(255),
+  Apellido VARCHAR(255),
+  fecha_nacimiento DATE,
+  direccion VARCHAR(255),
+  email VARCHAR(255),
+  nacionalidad VARCHAR(255),
+  dni INT,
+  obra_social VARCHAR(255),
+  id_historia_clinica int,
+  foreign key (id_historia_clinica) references historia_clinica(id)
+);
+
+CREATE TABLE `medico` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  Nombre VARCHAR(255),
+  Apellido VARCHAR(255),
+  fecha_nacimiento DATE,
+  direccion VARCHAR(255),
+  email VARCHAR(255),
+  nacionalidad VARCHAR(255),
+  dni INT,
+  especialidad VARCHAR(255),
+  matricula int
+);
+
+CREATE TABLE `administrativo` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  Nombre VARCHAR(255),
+  Apellido VARCHAR(255),
+  fecha_nacimiento DATE,
+  direccion VARCHAR(255),
+  email VARCHAR(255),
+  nacionalidad VARCHAR(255),
+  dni INT,
+  puesto VARCHAR(255),
+  administrador boolean
+);
+
+CREATE TABLE `turnos` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  fecha DATE,
+  estado boolean,
+  hora time,
+  id_medico int,
+  id_paciente int,
+  id_administrativo int NULL,
+  foreign key (id_medico) references medico(id),
+  foreign key (id_paciente) references paciente(id),
+  foreign key (id_administrativo) references administrativo(id)
+);
