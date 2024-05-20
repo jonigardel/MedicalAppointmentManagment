@@ -1,0 +1,15 @@
+SELECT paciente.Nombre, paciente.Apellido, paciente.dni, paciente.email
+FROM paciente
+JOIN turnos ON paciente.id = turnos.id_paciente
+WHERE turnos.estado = false;
+
+SELECT paciente.Nombre, paciente.Apellido, historia_clinica.diagnostico,historia_clinica.tratamiento, historia_clinica.observaciones
+FROM historia_clinica
+JOIN paciente ON historia_clinica.id = paciente.id_historia_clinica
+JOIN turnos ON paciente.id = turnos.id_paciente
+WHERE turnos.id = 12;
+
+SELECT historia_clinica.*
+FROM historia_clinica
+JOIN paciente ON historia_clinica.id = paciente.id_historia_clinica
+WHERE paciente.obra_social = 'OSDE';
