@@ -1,0 +1,11 @@
+delete from paciente;
+delete from medico;
+delete from administrativo;
+delete from historia_clinica;
+delete from turnos;
+
+select * from paciente;
+select * from medico;
+select * from administrativo;
+select * from historia_clinica;
+select * from turnos;
