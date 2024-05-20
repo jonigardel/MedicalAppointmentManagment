@@ -1,0 +1,25 @@
+INSERT INTO historia_clinica (diagnostico, observaciones, tratamiento) VALUES 
+('Hipertensión arterial', 'Presión arterial elevada', 'Medicación para controlar la presión arterial'),
+('Diabetes tipo 2', 'Niveles altos de glucosa en sangre', 'Control de la dieta y medicación para la diabetes'),
+('Gripe', 'Fiebre y malestar general', 'Descanso y medicación para aliviar los síntomas');
+
+INSERT INTO paciente (Nombre, Apellido, fecha_nacimiento, direccion, email, nacionalidad, dni, obra_social, id_historia_clinica) VALUES
+('Juan', 'Pérez', '1990-05-15', 'Calle Principal 123', 'juan.perez@example.com', 'Argentina', 12345678, 'OSDE', 1),
+('María', 'Gómez', '1985-09-20', 'Avenida Central 456', 'maria.gomez@example.com', 'Argentina', 98765432, 'Swiss Medical', 2),
+('Carlos', 'Rodríguez', '1978-03-10', 'Plaza Principal 789', 'carlos.rodriguez@example.com', 'Argentina', 45678901, 'Galeno', 3);
+
+INSERT INTO medico (Nombre, Apellido, fecha_nacimiento, direccion, email, nacionalidad, dni, especialidad, matricula) VALUES
+('Laura', 'González', '1980-07-20', 'Avenida Central 789', 'laura.gonzalez@example.com', 'Argentina', 12345678, 'Cardiología', 12345),
+('Martín', 'López', '1975-04-15', 'Calle Secundaria 456', 'martin.lopez@example.com', 'Argentina', 98765432, 'Pediatría', 54321),
+('Ana', 'Martínez', '1990-10-25', 'Plaza Principal 123', 'ana.martinez@example.com', 'Argentina', 45678901, 'Ginecología', 67890);
+
+INSERT INTO administrativo (Nombre, Apellido, fecha_nacimiento, direccion, email, nacionalidad, dni, puesto, administrador) VALUES
+('Pedro', 'Sánchez', '1985-06-30', 'Calle Principal 456', 'pedro.sanchez@example.com', 'Argentina', 13579246, 'Recepcionista', true),
+('Carolina', 'Díaz', '1992-03-18', 'Avenida Central 789', 'carolina.diaz@example.com', 'Argentina', 24681357, 'Secretaria', false),
+('Lucas', 'Rodríguez', '1988-09-10', 'Plaza Principal 456', 'lucas.rodriguez@example.com', 'Argentina', 98765432, 'Gestor de Citas', false);
+
+
+INSERT INTO turnos (fecha, estado, hora, id_medico, id_paciente, id_administrativo) VALUES
+('2024-05-20', true, '10:00:00', 1, 1, 1),
+('2024-05-21', false, '15:30:00', 2, 2, 2),
+('2024-05-22', true, '09:00:00', 3, 3, null);
