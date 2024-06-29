@@ -1,4 +1,5 @@
 entidades\Paciente.class
+controller\Connector.class
 entidades\Administrativo.class
 menu\MenuHistoriaClinica.class
 services\TurnoService.class
@@ -9,7 +10,9 @@ menu\MainMenu.class
 entidades\Turno.class
 menu\Login.class
 main\MedAppointManager.class
+controller\HistoriaClinicaDao.class
 services\PacienteService.class
+controller\PacienteDao.class
 entidades\HistoriaClinica.class
 menu\MenuAdministrativo.class
 services\MedicoService.class

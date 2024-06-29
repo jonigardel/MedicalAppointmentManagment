@@ -7,11 +7,13 @@ import java.text.SimpleDateFormat;
 public class Paciente extends Usuario {
     private String obraSocial;
     private int numeroCredencial;
-
-    public Paciente(UUID id, String nombre, String apellido, int dni, String email, String direccion, Date fechaDeNacimiento, String nacionalidad, String obraSocial, int numeroCredencial) {
+    private UUID idHistoriaCLinica;
+    
+    public Paciente(UUID id, String nombre, String apellido, int dni, String email, String direccion, Date fechaDeNacimiento, String nacionalidad, String obraSocial, int numeroCredencial, UUID idHistoriaCLinica ) {
         super(id, nombre, apellido, dni, email, direccion, fechaDeNacimiento, nacionalidad);
         this.obraSocial = obraSocial;
         this.numeroCredencial = numeroCredencial;
+        this.idHistoriaCLinica = idHistoriaCLinica;
     }
 
     public String getObraSocial() {
@@ -29,7 +31,15 @@ public class Paciente extends Usuario {
     public void setNumeroCredencial(int numeroCredencial) {
         this.numeroCredencial = numeroCredencial;
     }
+    
+    public UUID getIdHistoriaCLinica() {
+        return idHistoriaCLinica;
+    }
 
+    public void setIdHistoriaCLinica(UUID idHistoriaCLinica) {
+        this.idHistoriaCLinica = idHistoriaCLinica;
+    }
+        
     @Override
     public void mostrarInformacion() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

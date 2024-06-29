@@ -1,5 +1,6 @@
 package services;
 
+import controller.HistoriaClinicaDao;
 import entidades.HistoriaClinica;
 import entidades.Paciente;
 import java.util.ArrayList;
@@ -12,10 +13,6 @@ public class HistoriaClinicaService {
     private Scanner scanner = new Scanner(System.in);
 
     public void crearHistoriaClinica() {
-        System.out.println("Ingrese el ID del paciente:");
-        String idPaciente = scanner.nextLine();
-
-        scanner.nextLine();  
 
         System.out.println("Ingrese el diagnostico:");
         String diagnostico = scanner.nextLine();
@@ -26,8 +23,8 @@ public class HistoriaClinicaService {
         System.out.println("Ingrese el tratamiento:");
         String tratamiento = scanner.nextLine();
 
-        HistoriaClinica historiaClinica = new HistoriaClinica(UUID.randomUUID(), UUID.fromString(idPaciente), diagnostico, observaciones, tratamiento);
-
+        HistoriaClinica historiaClinica = new HistoriaClinica(UUID.randomUUID(), diagnostico, observaciones, tratamiento);
+HistoriaClinicaDao.insert(historiaClinica);
         historiasClinicas.add(historiaClinica);
 
         mostrarHistoriaClinica(historiaClinica);
@@ -86,7 +83,7 @@ public class HistoriaClinicaService {
     private HistoriaClinica buscarHistoriaClinicaPorPaciente(int dniPaciente) {
         Paciente paciente = PacienteService.buscarPacientePorDNI(dniPaciente);
         for (HistoriaClinica historiaClinica : historiasClinicas) {
-            if (historiaClinica.getIdPaciente() == paciente.getId()) {
+            if (historiaClinica.getId() == paciente.getIdHistoriaCLinica()) {
                 return historiaClinica;
             }
         }
@@ -95,7 +92,6 @@ public class HistoriaClinicaService {
 
     private void mostrarHistoriaClinica(HistoriaClinica historiaClinica) {
         System.out.println("Datos de la historia clinica:");
-        System.out.println("ID Paciente: " + historiaClinica.getIdPaciente());
         System.out.println("Diagnostico: " + historiaClinica.getDiagnostico());
         System.out.println("Observaciones: " + historiaClinica.getObservaciones());
         System.out.println("Tratamiento: " + historiaClinica.getTratamiento());

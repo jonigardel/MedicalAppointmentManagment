@@ -9,9 +9,8 @@ public class HistoriaClinica {
     private String observaciones;
     private String tratamiento;
 
-    public HistoriaClinica(UUID id, UUID idPaciente, String diagnostico, String observaciones, String tratamiento) {
+    public HistoriaClinica(UUID id,String diagnostico, String observaciones, String tratamiento) {
         this.id = id;
-        this.idPaciente = idPaciente;
         this.diagnostico = diagnostico;
         this.observaciones = observaciones;
         this.tratamiento = tratamiento;
@@ -23,14 +22,6 @@ public class HistoriaClinica {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public UUID getIdPaciente() {
-        return idPaciente;
-    }
-
-    public void setIdPaciente(UUID idPaciente) {
-        this.idPaciente = idPaciente;
     }
 
     public String getDiagnostico() {

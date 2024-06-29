@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
+import controller.PacienteDao;
 
 public class PacienteService {
     private static List<Paciente> pacientes = new ArrayList<>();
@@ -57,10 +58,9 @@ public class PacienteService {
         System.out.println("Ingrese la credencial de la obra social:");
         int credencial = scanner.nextInt();
 
-        UUID pacienteId =  UUID.randomUUID();
-        Paciente paciente = new Paciente(pacienteId, nombre, apellido, dni, email, direccion, fechaNacimiento, nacionalidad, obraSocial, credencial);
-        HistoriaClinica historia = new HistoriaClinica(UUID.randomUUID(),pacienteId, "","","");
-        
+        HistoriaClinica historia = new HistoriaClinica(UUID.randomUUID(), "","","");
+        Paciente paciente = new Paciente(UUID.randomUUID(), nombre, apellido, dni, email, direccion, fechaNacimiento, nacionalidad, obraSocial, credencial, historia.getId());
+        PacienteDao.insert(paciente);
         System.out.println("Paciente Registrado correctamente");
 
         paciente.mostrarInformacion();
