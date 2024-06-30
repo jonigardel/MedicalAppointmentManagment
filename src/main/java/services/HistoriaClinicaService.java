@@ -24,31 +24,38 @@ public class HistoriaClinicaService {
         String tratamiento = scanner.nextLine();
 
         HistoriaClinica historiaClinica = new HistoriaClinica(UUID.randomUUID(), diagnostico, observaciones, tratamiento);
-HistoriaClinicaDao.insert(historiaClinica);
+        HistoriaClinicaDao.insert(historiaClinica);
         historiasClinicas.add(historiaClinica);
 
         mostrarHistoriaClinica(historiaClinica);
     }
 
     public void editarHistoriaClinica() {
-        System.out.println("Ingrese el ID del paciente de la historia clinica a editar:");
+        System.out.println("Ingrese el DNI del paciente de la historia clinica a editar:");
         int dniPaciente = scanner.nextInt();
         scanner.nextLine();  // Consume newline
         HistoriaClinica historiaClinica = buscarHistoriaClinicaPorPaciente(dniPaciente);
         if (historiaClinica != null) {
+            System.out.println("Para no editar un campo, deje vacio y presione enter.");
             System.out.println("Ingrese el nuevo diagnostico:");
             String diagnostico = scanner.nextLine();
+            if (!diagnostico.isEmpty()) {
+                historiaClinica.setDiagnostico(diagnostico);
 
+            }
             System.out.println("Ingrese las nuevas observaciones:");
             String observaciones = scanner.nextLine();
+            if (!observaciones.isEmpty()) {
+                historiaClinica.setObservaciones(observaciones);
 
+            }
             System.out.println("Ingrese el nuevo tratamiento:");
             String tratamiento = scanner.nextLine();
+            if (!tratamiento.isEmpty()) {
+                historiaClinica.setTratamiento(tratamiento);
 
-            historiaClinica.setDiagnostico(diagnostico);
-            historiaClinica.setObservaciones(observaciones);
-            historiaClinica.setTratamiento(tratamiento);
-
+            }
+            HistoriaClinicaDao.update(historiaClinica);
             System.out.println("Historia clinica actualizada:");
             mostrarHistoriaClinica(historiaClinica);
         } else {
@@ -57,43 +64,47 @@ HistoriaClinicaDao.insert(historiaClinica);
     }
 
     public void eliminarHistoriaClinica() {
-        System.out.println("Ingrese el dni de la historia clinica a eliminar:");
-        int dniPaciente = scanner.nextInt();
-        scanner.nextLine(); 
-
-        HistoriaClinica historiaClinica = buscarHistoriaClinicaPorPaciente(dniPaciente);
-        if (historiaClinica != null) {
-            historiasClinicas.remove(historiaClinica);
-            System.out.println("Historia clnica eliminada.");
-        } else {
-            System.out.println("Historia clinica no encontrada.");
-        }
+        System.out.println("Ingrese el id de la historia clinica a eliminar:");
+        String id = scanner.nextLine();
+        scanner.nextLine();
+        HistoriaClinicaDao.delete(id);
+       
     }
 
     public void listarHistoriasClinicas() {
-        if (historiasClinicas.isEmpty()) {
-            System.out.println("No hay historias clinicas registradas.");
-        } else {
-            for (HistoriaClinica historiaClinica : historiasClinicas) {
-                mostrarHistoriaClinica(historiaClinica);
-            }
+        historiasClinicas = HistoriaClinicaDao.listHistoriasClinicas();
+        for (HistoriaClinica historiaClinica : historiasClinicas) {
+            mostrarHistoriaClinica(historiaClinica);
         }
+        
+    }
+    
+    public void buscarHistoriaClinicaPorDNI(){
+        System.out.println("Ingrese el DNI del paciente de la historia clinica a editar:");
+        int dniPaciente = scanner.nextInt();
+        HistoriaClinica historiaClinica = buscarHistoriaClinicaPorPaciente(dniPaciente);
+        mostrarHistoriaClinica(historiaClinica);
     }
 
     private HistoriaClinica buscarHistoriaClinicaPorPaciente(int dniPaciente) {
         Paciente paciente = PacienteService.buscarPacientePorDNI(dniPaciente);
-        for (HistoriaClinica historiaClinica : historiasClinicas) {
-            if (historiaClinica.getId() == paciente.getIdHistoriaCLinica()) {
-                return historiaClinica;
-            }
+        if(paciente != null){
+           historiasClinicas = HistoriaClinicaDao.listHistoriasClinicas();
+            for (HistoriaClinica historiaClinica : historiasClinicas) {
+                if (historiaClinica.getId().toString().equals(paciente.getIdHistoriaCLinica().toString())) {
+                    return historiaClinica;
+                }
+            } 
         }
         return null;
     }
 
     private void mostrarHistoriaClinica(HistoriaClinica historiaClinica) {
+        System.out.println("-------------------------------");
         System.out.println("Datos de la historia clinica:");
         System.out.println("Diagnostico: " + historiaClinica.getDiagnostico());
         System.out.println("Observaciones: " + historiaClinica.getObservaciones());
         System.out.println("Tratamiento: " + historiaClinica.getTratamiento());
+        System.out.println("-------------------------------");
     }
 }

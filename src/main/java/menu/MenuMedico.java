@@ -15,7 +15,9 @@ public class MenuMedico {
             System.out.println("2. Editar Medico");
             System.out.println("3. Eliminar Medico");
             System.out.println("4. Listar Medicos");
-            System.out.println("5. Volver al Menu Principal");
+            System.out.println("5. Consultar Medico");
+            System.out.println("6. Listar Especialidades Medicas");
+            System.out.println("7. Volver al Menu Principal");
             System.out.print("Seleccione una opcion: ");
             opcion = scanner.nextInt();
             scanner.nextLine();
@@ -30,10 +32,14 @@ public class MenuMedico {
                 case 4 ->
                     medicoService.listarMedicos();
                 case 5 ->
+                    medicoService.consultarMedicoPorDNI();
+                case 6 ->
+                    medicoService.mostrarEspecialidades();
+                case 7 ->
                     System.out.println("Volviendo al Menu Principal...");
                 default ->
                     System.out.println("Opcion no valida. Intente de nuevo.");
             }
-        } while (opcion != 5);
+        } while (opcion != 7);
     }
 }

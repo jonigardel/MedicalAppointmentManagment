@@ -17,7 +17,7 @@ CREATE TABLE `paciente` (
   dni INT,
   obra_social VARCHAR(255),
   numero_credencial int,
-  id_historia_clinica VARCHAR(32),
+  id_historia_clinica VARCHAR(36),
   foreign key (id_historia_clinica) references historia_clinica(id)
 );
 
@@ -51,11 +51,11 @@ CREATE TABLE `administrativo` (
 CREATE TABLE `turnos` (
   id VARCHAR(36) DEFAULT (uuid()) PRIMARY KEY,
   fecha DATE,
-  estado boolean,
+  estado varchar(32),
   hora time,
-  id_medico VARCHAR(32),
-  id_paciente VARCHAR(32),
-  id_administrativo VARCHAR(32) NULL,
+  id_medico VARCHAR(36),
+  id_paciente VARCHAR(36),
+  id_administrativo VARCHAR(36) NULL,
   foreign key (id_medico) references medico(id),
   foreign key (id_paciente) references paciente(id),
   foreign key (id_administrativo) references administrativo(id)

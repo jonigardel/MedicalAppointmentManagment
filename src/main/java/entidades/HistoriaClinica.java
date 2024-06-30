@@ -8,7 +8,7 @@ public class HistoriaClinica {
     private String diagnostico;
     private String observaciones;
     private String tratamiento;
-
+    
     public HistoriaClinica(UUID id,String diagnostico, String observaciones, String tratamiento) {
         this.id = id;
         this.diagnostico = diagnostico;

@@ -15,7 +15,8 @@ public class MenuPacientes {
             System.out.println("2. Editar Paciente");
             System.out.println("3. Eliminar Paciente");
             System.out.println("4. Listar Pacientes");
-            System.out.println("5. Volver al Menu Principal");
+            System.out.println("5. Buscar Paciente Por DNI");
+            System.out.println("6. Volver al Menu Principal");
             System.out.print("Seleccione una opcion: ");
             opcion = scanner.nextInt();
             scanner.nextLine();  
@@ -25,9 +26,10 @@ public class MenuPacientes {
                 case 2 -> pacienteService.editarPaciente();
                 case 3 -> pacienteService.eliminarPaciente();
                 case 4 -> pacienteService.listarPacientes();
-                case 5 -> System.out.println("Volviendo al Menu Principal...");
+                case 5 -> pacienteService.buscarPorDni();
+                case 6 -> System.out.println("Volviendo al Menu Principal...");
                 default -> System.out.println("Opcion no valida. Intente de nuevo.");
             }
-        } while (opcion != 5);
+        } while (opcion != 6);
     }
 }

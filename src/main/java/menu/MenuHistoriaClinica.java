@@ -14,7 +14,8 @@ public class MenuHistoriaClinica {
             System.out.println("2. Editar Historia Clinica");
             System.out.println("3. Eliminar Historia Clinica");
             System.out.println("4. Listar Historias Clinicas");
-            System.out.println("5. Volver al Menu Principal");
+            System.out.println("5. Consultar Historia Clinica por Paciente");
+            System.out.println("6. Volver al Menu Principal");
             System.out.print("Seleccione una opcion: ");
             opcion = scanner.nextInt();
             scanner.nextLine();  
@@ -24,9 +25,10 @@ public class MenuHistoriaClinica {
                 case 2 -> historiaClinicaService.editarHistoriaClinica();
                 case 3 -> historiaClinicaService.eliminarHistoriaClinica();
                 case 4 -> historiaClinicaService.listarHistoriasClinicas();
-                case 5 -> System.out.println("Volviendo al Menu Principal...");
+                case 5 -> historiaClinicaService.buscarHistoriaClinicaPorDNI();
+                case 6 -> System.out.println("Volviendo al Menu Principal...");
                 default -> System.out.println("Opcion no valida. Intente de nuevo.");
             }
-        } while (opcion != 5);
+        } while (opcion != 6);
     }
 }

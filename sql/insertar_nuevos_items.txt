@@ -1,25 +1,25 @@
-INSERT INTO historia_clinica (diagnostico, observaciones, tratamiento) VALUES 
-('Hipertensión arterial', 'Presión arterial elevada', 'Medicación para controlar la presión arterial'),
-('Diabetes tipo 2', 'Niveles altos de glucosa en sangre', 'Control de la dieta y medicación para la diabetes'),
-('Gripe', 'Fiebre y malestar general', 'Descanso y medicación para aliviar los síntomas');
+INSERT INTO historia_clinica (id, diagnostico, observaciones, tratamiento) VALUES 
+('d49ce8ec-59ab-44b9-94a7-0241385705ac','Hipertensión arterial', 'Presión arterial elevada', 'Medicación para controlar la presión arterial'),
+('e6e58003-bf87-42a5-ab4c-7ae773c67bb5','Diabetes tipo 2', 'Niveles altos de glucosa en sangre', 'Control de la dieta y medicación para la diabetes'),
+('f94928dc-0bbb-48eb-a356-e2ceedb7bb4b','Gripe', 'Fiebre y malestar general', 'Descanso y medicación para aliviar los síntomas');
 
-INSERT INTO paciente (Nombre, Apellido, fecha_nacimiento, direccion, email, nacionalidad, dni, obra_social, id_historia_clinica) VALUES
-('Juan', 'Pérez', '1990-05-15', 'Calle Principal 123', 'juan.perez@example.com', 'Argentina', 12345678, 'OSDE', 1),
-('María', 'Gómez', '1985-09-20', 'Avenida Central 456', 'maria.gomez@example.com', 'Argentina', 98765432, 'Swiss Medical', 2),
-('Carlos', 'Rodríguez', '1978-03-10', 'Plaza Principal 789', 'carlos.rodriguez@example.com', 'Argentina', 45678901, 'Galeno', 3);
+INSERT INTO paciente (id, Nombre, Apellido, fecha_nacimiento, direccion, email, nacionalidad, dni, obra_social, numero_credencial, id_historia_clinica) VALUES
+('6b481bc9-371c-11ef-a434-02503523f955','Juan', 'Pérez', '1990-05-15', 'Calle Principal 123', 'juan.perez@example.com', 'Argentina', 12345678, 'OSDE', 12345,'d49ce8ec-59ab-44b9-94a7-0241385705ac'),
+('fd1d1943-7adb-4859-bd6f-a22e1374df48','María', 'Gómez', '1985-09-20', 'Avenida Central 456', 'maria.gomez@example.com', 'Argentina', 98765432, 'Swiss Medical', 14526, 'e6e58003-bf87-42a5-ab4c-7ae773c67bb5'),
+('d00cff8c-648f-4a59-8f26-f716dae99ab8','Carlos', 'Rodríguez', '1978-03-10', 'Plaza Principal 789', 'carlos.rodriguez@example.com', 'Argentina', 45678901, 'Galeno', 115478, 'f94928dc-0bbb-48eb-a356-e2ceedb7bb4b');
 
-INSERT INTO medico (Nombre, Apellido, fecha_nacimiento, direccion, email, nacionalidad, dni, especialidad, matricula) VALUES
-('Laura', 'González', '1980-07-20', 'Avenida Central 789', 'laura.gonzalez@example.com', 'Argentina', 12345678, 'Cardiología', 12345),
-('Martín', 'López', '1975-04-15', 'Calle Secundaria 456', 'martin.lopez@example.com', 'Argentina', 98765432, 'Pediatría', 54321),
-('Ana', 'Martínez', '1990-10-25', 'Plaza Principal 123', 'ana.martinez@example.com', 'Argentina', 45678901, 'Ginecología', 67890);
+INSERT INTO medico (id,Nombre, Apellido, fecha_nacimiento, direccion, email, nacionalidad, dni, especialidad, matricula, horarios) VALUES
+('9eb6975c-e576-4120-8799-98138aa169ff','Laura', 'González', '1980-07-20', 'Avenida Central 789', 'laura.gonzalez@example.com', 'Argentina', 12345678, 'Cardiología', 12345, '{lunes=08:00/19:00}'),
+('6440ec41-074a-42e0-bfe0-1961524938c1','Martín', 'López', '1975-04-15', 'Calle Secundaria 456', 'martin.lopez@example.com', 'Argentina', 98765432, 'Pediatría', 54321, '{martes=10:00/16:00}'),
+('cf650d24-eb0b-4145-bf80-0bead9fd8df5','Ana', 'Martínez', '1990-10-25', 'Plaza Principal 123', 'ana.martinez@example.com', 'Argentina', 45678901, 'Ginecología', 67890,'{miercoles=08:00/14:00}');
 
-INSERT INTO administrativo (Nombre, Apellido, fecha_nacimiento, direccion, email, nacionalidad, dni, puesto, administrador) VALUES
-('Pedro', 'Sánchez', '1985-06-30', 'Calle Principal 456', 'pedro.sanchez@example.com', 'Argentina', 13579246, 'Recepcionista', true),
-('Carolina', 'Díaz', '1992-03-18', 'Avenida Central 789', 'carolina.diaz@example.com', 'Argentina', 24681357, 'Secretaria', false),
-('Lucas', 'Rodríguez', '1988-09-10', 'Plaza Principal 456', 'lucas.rodriguez@example.com', 'Argentina', 98765432, 'Gestor de Citas', false);
+INSERT INTO administrativo (id,Nombre, Apellido, fecha_nacimiento, direccion, email, nacionalidad, dni, puesto, administrador) VALUES
+('0372f2c4-bb70-40c1-8364-f373e8927767','Pedro', 'Sánchez', '1985-06-30', 'Calle Principal 456', 'pedro.sanchez@example.com', 'Argentina', 13579246, 'Recepcionista', true),
+('90bcf852-fe9a-4792-87e2-57462d1c8b5c','Carolina', 'Díaz', '1992-03-18', 'Avenida Central 789', 'carolina.diaz@example.com', 'Argentina', 24681357, 'Secretaria', false),
+('ddba2435-75b8-4ea4-b9e1-cf1bb0c0e856','Lucas', 'Rodríguez', '1988-09-10', 'Plaza Principal 456', 'lucas.rodriguez@example.com', 'Argentina', 98765432, 'Gestor de Citas', false);
 
 
-INSERT INTO turnos (fecha, estado, hora, id_medico, id_paciente, id_administrativo) VALUES
-('2024-05-20', true, '10:00:00', 1, 1, 1),
-('2024-05-21', false, '15:30:00', 2, 2, 2),
-('2024-05-22', true, '09:00:00', 3, 3, null);
+INSERT INTO turnos (id, fecha, estado, hora, id_medico, id_paciente, id_administrativo) VALUES
+('721d2465-e0f1-4934-9336-b0661dbc2045','2024-07-01', 'pendiente', '10:00:00','9eb6975c-e576-4120-8799-98138aa169ff', '6b481bc9-371c-11ef-a434-02503523f955', '0372f2c4-bb70-40c1-8364-f373e8927767'),
+('be1459b7-522c-481e-9d99-e9d3cb076079','2024-07-02', 'pendiente', '15:30:00', '6440ec41-074a-42e0-bfe0-1961524938c1','fd1d1943-7adb-4859-bd6f-a22e1374df48','90bcf852-fe9a-4792-87e2-57462d1c8b5c'),
+('8b808cea-fb43-47af-af56-afe088239e86','2024-07-03', 'pendiente', '09:00:00', 'cf650d24-eb0b-4145-bf80-0bead9fd8df5','d00cff8c-648f-4a59-8f26-f716dae99ab8',  null);

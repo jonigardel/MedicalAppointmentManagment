@@ -1,3 +1,4 @@
+controller\MedicoDao.class
 entidades\Paciente.class
 controller\Connector.class
 entidades\Administrativo.class
@@ -5,6 +6,7 @@ menu\MenuHistoriaClinica.class
 services\TurnoService.class
 menu\MenuTurno.class
 services\HistoriaClinicaService.class
+controller\TurnoDao.class
 menu\MenuMedico.class
 menu\MainMenu.class
 entidades\Turno.class
