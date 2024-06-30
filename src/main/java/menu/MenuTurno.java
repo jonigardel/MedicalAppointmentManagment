@@ -14,9 +14,9 @@ public class MenuTurno {
             System.out.println("2. Editar Turno");
             System.out.println("3. Cancelar Turno");
             System.out.println("4. Marcar Turno Ausente");
-            System.out.println("4. Listar Turnos");
-            System.out.println("4. Listar Turnos Ausentes del mes");
-            System.out.println("5. Volver al Menu Principal");
+            System.out.println("5. Listar Turnos por paciente");
+            System.out.println("6. Listar Turnos Ausentes del mes");
+            System.out.println("7. Volver al Menu Principal");
             System.out.print("Seleccione una opcion: ");
             opcion = scanner.nextInt();
             scanner.nextLine();

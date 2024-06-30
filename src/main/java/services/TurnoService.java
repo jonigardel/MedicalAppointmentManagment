@@ -63,11 +63,16 @@ public class TurnoService {
                     Date fechaTurno = null;
                     String horaSeleccionada = null;
                     boolean disponible = false;
+                    boolean primerOpcion = true;
                     while (!disponible) {
 
                         System.out.println("Ingrese fecha seleccionada(yyyy-mm-dd)");
                         //todo se omite un scan porque en la primera iteracion no toma la nueva linea
-                        String scannResidual = scanner.nextLine();
+                        if(primerOpcion){
+                            String scannResidual = scanner.nextLine();
+                            primerOpcion = false;
+                        }
+                        
                         String fechaSeleccionada = scanner.nextLine();
 
                         fechaTurno = dateFormat.parse(fechaSeleccionada);
@@ -155,11 +160,15 @@ public class TurnoService {
                         Date fechaTurno = null;
                         String horaSeleccionada = null;
                         boolean disponible = false;
+                        boolean primerOpcion = true;
                         while (!disponible) {
 
                             System.out.println("Ingrese fecha seleccionada(yyyy-mm-dd)");
                             //todo se omite un scan porque en la primera iteracion no toma la nueva linea
+                           if(primerOpcion){
                             String scannResidual = scanner.nextLine();
+                            primerOpcion = false;
+                            }
                             String fechaSeleccionada = scanner.nextLine();
 
                             fechaTurno = dateFormat.parse(fechaSeleccionada);
@@ -219,7 +228,7 @@ public class TurnoService {
             String idTurno = (String) turnoSeleccionado.get("id");
             
             TurnoDao.cambiarEstado(idTurno, estado);
-            System.out.println("Turno"+ estado +"correctamente");
+            System.out.println("Turno marcado "+ estado +" correctamente");
         }
     }
 
@@ -235,7 +244,7 @@ public class TurnoService {
     }
 
     public void listarTurnosPorPaciente(){
-         System.out.println("Ingrese el dni del paciente:");
+        System.out.println("Ingrese el dni del paciente:");
         int dni = scanner.nextInt();
         Paciente paciente = PacienteService.buscarPacientePorDNI(dni);
         if(paciente != null){
@@ -258,6 +267,8 @@ public class TurnoService {
             for (Turno turno : turnos) {
                 mostrarTurno(turno);
             }
+        } else {
+            System.out.println("no hay turnos ausentes para este mes");
         }
     }
     
@@ -370,7 +381,6 @@ public class TurnoService {
                 String[] horasDisponibles = disponibilidad.get(dia).split("/");
                 String inicio = horasDisponibles[0];
                 String fin = horasDisponibles[1];
-                System.out.println("horainicio " + inicio+ "   "  + fin );
                 Date horaDate = hourFormat.parse(hora);
                 Date inicioDate = hourFormat.parse(inicio);
                 Date finDate = hourFormat.parse(fin);

@@ -8,7 +8,7 @@ import java.sql.*;
 public class Connector {
     private final static String URL = "jdbc:mysql://localhost:3306/med_appointment";
     private final static String USER = "root";
-    private final static String PASS = "pass";
+    private final static String PASS = "Eunbit27";
     
     public static Connection getConnection(){
         Connection conn=null;
