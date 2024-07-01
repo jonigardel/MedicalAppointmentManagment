@@ -262,10 +262,23 @@ public class TurnoService {
     }
     
     public void listarTurnosEstado(String estado){
-        List<Turno> turnos = TurnoDao.listarTurnosEstado(estado);
+        List<Map<String, Object>> turnos = TurnoDao.listarTurnosEstado(estado);
         if (!turnos.isEmpty()) {
-            for (Turno turno : turnos) {
-                mostrarTurno(turno);
+            for (Map<String, Object> turno : turnos) {
+                String fecha = (String) turno.get("fecha");
+                String hora = (String) turno.get("hora");
+                String nombreMedico = (String) turno.get("nombre_medico");
+                String apellidoMedico = (String) turno.get("apellido_medico");
+                String nombre_paciente = (String) turno.get("nombre_paciente");
+                String apellido_paciente = (String) turno.get("apellido_paciente");
+                String dni_paciente = (String) turno.get("dni_paciente");
+                System.out.println("-------------------------");
+                System.out.println("Fecha: " + fecha);
+                System.out.println("Hora: " + hora);
+                System.out.println("Estado: " + estado);
+                System.out.println("Médico: " + nombreMedico + " " + apellidoMedico);
+                System.out.println("Paciente: " + nombre_paciente + " " + apellido_paciente + " DNI: " + dni_paciente);
+                System.out.println("-------------------------");
             }
         } else {
             System.out.println("no hay turnos ausentes para este mes");
@@ -274,8 +287,7 @@ public class TurnoService {
     
     
     public List<Turno> listarTurnosPorMedico(UUID idMedico) {
-        List<Turno> turnosTomados;
-        turnosTomados = new ArrayList<>();
+        List<Turno> turnosTomados = new ArrayList<>();
         ArrayList<Turno> turnos = TurnoDao.listTurnos();
         if (!turnos.isEmpty()) {
             for (Turno turno : turnos) {

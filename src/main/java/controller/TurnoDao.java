@@ -22,7 +22,7 @@ public class TurnoDao {
     private static final String UPDATE = "UPDATE turnos SET fecha = ?, hora = ?, id_medico = ? WHERE id = ?";
     private static final String UPDATE_ESTADO = "UPDATE turnos SET estado = ? WHERE id = ?";
     private static final String DELETE = "DELETE FROM turnos WHERE id = ?";
-    private static final String SELECT_ESTADO = "SELECT * FROM turnos WHERE estado = ?";
+    private static final String SELECT_ESTADO = "SELECT t.id, t.fecha, t.estado, t.hora, t.id_medico, m.nombre AS nombre_medico, m.apellido AS apellido_medico, t.id_paciente, t.id_administrativo, p.nombre AS nombre_paciente, p.apellido AS apellido_paciente, p.dni AS dni_paciente FROM turnos t JOIN medico m ON t.id_medico = m.id JOIN paciente p ON t.id_paciente = p.id WHERE t.estado = ?;";
     
     public static void insert(Turno t) {
         Connection conn = null;
@@ -108,26 +108,32 @@ public class TurnoDao {
         return turnos;
     }
     
-    public static ArrayList<Turno> listarTurnosEstado(String estado) {
+    public static List<Map<String, Object>> listarTurnosEstado(String estado) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        ArrayList<Turno> turnos = new ArrayList<Turno>();
+        List<Map<String, Object>> turnos = new ArrayList<>(); 
         try {
             conn = Connector.getConnection();
             stmt = conn.prepareStatement( SELECT_ESTADO);
             stmt.setString(1, estado);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                Turno t = new Turno(
-                        UUID.fromString(rs.getString("id")), 
-                        UUID.fromString(rs.getString("id_medico")),
-                        UUID.fromString(rs.getString("id_paciente")),
-                        rs.getDate("fecha"), 
-                        rs.getString("hora"),
-                        rs.getString("estado")
-                );
-                turnos.add(t);
+                Map<String, Object> rowData = new HashMap<>();
+                rowData.put("id", rs.getString("id"));
+                rowData.put("fecha", rs.getString("fecha"));
+                rowData.put("estado", rs.getString("estado"));
+                rowData.put("hora", rs.getString("hora"));
+                rowData.put("id_medico", rs.getString("id_medico"));
+                rowData.put("nombre_medico", rs.getString("nombre_medico"));
+                rowData.put("apellido_medico", rs.getString("apellido_medico"));
+                rowData.put("nombre_paciente", rs.getString("nombre_paciente"));
+                rowData.put("apellido_paciente", rs.getString("apellido_paciente"));
+                rowData.put("dni_paciente", rs.getString("dni_paciente"));
+                rowData.put("id_paciente", rs.getString("id_paciente"));
+                rowData.put("id_administrativo", rs.getString("id_administrativo"));
+
+                turnos.add(rowData);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -139,7 +145,7 @@ public class TurnoDao {
         return turnos;
     }
     
-        public static ArrayList<Turno> listTurnosPorMedico(String medicoId) {
+    public static ArrayList<Turno> listTurnosPorMedico(String medicoId) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
